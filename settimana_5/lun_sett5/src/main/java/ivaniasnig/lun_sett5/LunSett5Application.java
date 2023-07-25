@@ -43,7 +43,7 @@ public class LunSett5Application {
 		
 		log.info(ctx.getBean("ordine").toString());
 		
-		log.info("Totale ordine: " + ((Ordine) ctx.getBean("ordine")).totale());
+		log.info("Totale dell' ordine: " + ((Ordine) ctx.getBean("ordine")).totale());
 
 		
 		

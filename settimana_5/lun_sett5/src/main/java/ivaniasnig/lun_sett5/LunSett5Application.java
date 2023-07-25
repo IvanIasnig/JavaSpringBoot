@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import Coperto.Ordine;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
@@ -14,6 +15,7 @@ public class LunSett5Application {
 		SpringApplication.run(LunSett5Application.class, args);
 		
 		configWithConfigAnnotation();
+
 	}
 	
 
@@ -36,6 +38,12 @@ public class LunSett5Application {
 		log.info(ctx.getBean("pizzasalameEcozze").toString());
 		
 		log.info(ctx.getBean("pizzaCozzeEananas").toString());
+		
+		log.info(ctx.getBean("ordine").toString());
+		
+		Ordine mioOrdine = ctx.getBean(Ordine.class);
+		double importoTotale = mioOrdine.totale();
+		log.info("L'importo totale dell'ordine è: " + importoTotale);
 		
 		ctx.close();
 	}

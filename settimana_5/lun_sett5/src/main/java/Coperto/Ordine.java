@@ -1,11 +1,9 @@
 package Coperto;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 
 import Enum.StatoOrdine;
 import ivaniasnig.lun_sett5.Bevande;
@@ -17,15 +15,14 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-// @PropertySource("classpath:application.properties")
+
 public class Ordine {
 	private int numeroOrdine;
 	private StatoOrdine ordine;
 	private int numCoperti;
 	private LocalDateTime oraComanda;
-	private double importoTotale = totale();
-	// @Value("${application.costoCoperto}")
-	double costoCoperto = 2;
+	@Value("${application.costoCoperto}")
+	private double costoCoperto;
 	private Tavolo tavolo;
 	private List<Pizza> pizze;
 	private List<Bevande> bevande;
@@ -40,11 +37,12 @@ public class Ordine {
 		this.tavolo = tavolo;
 		this.pizze = pizze;
 		this.bevande = bevande;
-	}
+}
 	
 	public double totale() {
 		List<Pizza> listaPizze =  this.getPizze();
-		List<Pizza> listaBevande =  this.getPizze();
+		List<Bevande> listaBevande =  this.getBevande();
+
 		
 		double somma = 0;
 		for(int i = 0; i<listaPizze.size(); i++) {

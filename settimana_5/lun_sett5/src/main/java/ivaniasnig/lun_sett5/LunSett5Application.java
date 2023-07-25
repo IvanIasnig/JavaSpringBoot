@@ -3,12 +3,14 @@ package ivaniasnig.lun_sett5;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 
 import Coperto.Ordine;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
 @Slf4j
+@PropertySource("classpath:application.properties")
 public class LunSett5Application {
 
 	public static void main(String[] args) {
@@ -41,9 +43,9 @@ public class LunSett5Application {
 		
 		log.info(ctx.getBean("ordine").toString());
 		
-		Ordine mioOrdine = ctx.getBean(Ordine.class);
-		double importoTotale = mioOrdine.totale();
-		log.info("L'importo totale dell'ordine è: " + importoTotale);
+		log.info("Totale ordine: " + ((Ordine) ctx.getBean("ordine")).totale());
+
+		
 		
 		ctx.close();
 	}

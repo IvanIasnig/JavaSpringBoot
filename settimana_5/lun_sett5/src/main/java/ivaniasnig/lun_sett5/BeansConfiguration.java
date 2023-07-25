@@ -69,6 +69,8 @@ public class BeansConfiguration {
 	    List<Pizza> listaPizze = new ArrayList<>();
 	    listaPizze.add(pizzaCozzeEananas());
 	    listaPizze.add(pizzasalameEcozze());
+	    listaPizze.add(pizzacozze());
+
 	    
 	    List<Bevande> listaBevande = new ArrayList<>();
 	    listaBevande.add(fanta());

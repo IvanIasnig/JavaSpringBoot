@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import Coperto.Ordine;
 import Coperto.Tavolo;
@@ -65,6 +66,7 @@ public class BeansConfiguration {
 	}
 	
 	@Bean
+	@Scope("prototype")
 	Ordine ordine() {
 	    List<Pizza> listaPizze = new ArrayList<>();
 	    listaPizze.add(pizzaCozzeEananas());
@@ -77,8 +79,6 @@ public class BeansConfiguration {
 	    
 	    return new Ordine (1, StatoOrdine.SERVITO, 3, LocalDateTime.now(), tavolo(), listaPizze, listaBevande);
 	}
-	
-	
 
 	
 }

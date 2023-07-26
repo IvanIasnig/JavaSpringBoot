@@ -1,5 +1,8 @@
 package ivaniasnig.lun_sett5;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -43,10 +46,26 @@ public class LunSett5Application {
 		
 		log.info(ctx.getBean("ordine").toString());
 		
-		log.info("Totale dell' ordine: " + ((Ordine) ctx.getBean("ordine")).totale());
+		log.info(ctx.getBean("ordine").toString());
+		log.info("Totale del primo ordine: " + ((Ordine) ctx.getBean("ordine")).totale());
 
-		
-		
+        Ordine ordine2 = ctx.getBean(Ordine.class);
+        ordine2.setNumeroOrdine(2);
+        ordine2.setNumCoperti(4);
+
+        log.info(ordine2.toString());
+        log.info("Totale del secondo ordine: " + ordine2.totale());
+        
+        Ordine ordine3 = ctx.getBean(Ordine.class);
+        ordine3.setNumeroOrdine(2);
+        ordine3.setNumCoperti(8);
+        List<Bevande> nuoveBevande = new ArrayList<>(ordine2.getBevande());
+        nuoveBevande.add(ctx.getBean("coca", Bevande.class));
+        ordine3.setBevande(nuoveBevande);
+
+        log.info(ordine3.toString());
+        log.info("Totale del secondo ordine: " + ordine3.totale());
+
 		ctx.close();
 	}
 	

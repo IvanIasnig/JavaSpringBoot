@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import Enum.StatoOrdine;
 import ivaniasnig.lun_sett5.Bevande;
@@ -15,7 +17,6 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-
 public class Ordine {
 	private int numeroOrdine;
 	private StatoOrdine ordine;

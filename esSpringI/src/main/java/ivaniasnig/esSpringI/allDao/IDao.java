@@ -5,7 +5,7 @@ import java.util.List;
 import ivaniasnig.esSpringI.classi.Utente;
 
 public interface IDao {
-//	public void save(Utente utente);
+	public void save(Utente utente);
 //
 //	public List<Utente> findAll();
 //

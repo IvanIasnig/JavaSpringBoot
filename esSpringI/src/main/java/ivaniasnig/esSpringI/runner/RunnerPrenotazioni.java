@@ -64,7 +64,6 @@ public class RunnerPrenotazioni implements CommandLineRunner{
             log.info("Esiste già una prenotazione per la postazione: " + postazione.getCu() + " per oggi, scegli un altra data.");
         } else {
             log.info("Non esiste una prenotazione per la postazione: " + postazione.getCu() + " puoi prenotare! ");
-            
         }
         
         LocalDate dateDomani = LocalDate.now().plusDays(1);

@@ -43,10 +43,7 @@ public class Services implements IDao {
 		log.info(edificio + " salvato!");
 	}
 	
-	public void save(Prenotazione prenotazione) {
-		prenotazioniRepository.save(prenotazione);
-		log.info(prenotazione + " salvato!");
-	}
+
 
 	public List<Utente> findAll() {
 		return utentiRepository.findAll();
@@ -75,13 +72,6 @@ public class Services implements IDao {
 		return utentiRepository.count();
 	}
 	
-	public boolean postazioneLibera(Postazione postazione, LocalDate date) {
-	    return prenotazioniRepository.existsByPostazioneAndDataPrenotazione(postazione, date);
-	}
-
-	public boolean puoPrenotare(Utente utente, LocalDate date) {
-	    return prenotazioniRepository.existsByUtenteAndDataPrenotazione(utente, date);
-	}
 	
 	public void findPostazione(TipoPostazione tipo, String citta) {
         List<Postazione> postazione = postazioniRepository.findByTipoAndEdificio_Citta(tipo, citta);
@@ -93,6 +83,33 @@ public class Services implements IDao {
             log.info("Postazione non trovata");
         }
     }
+	
+	public boolean postazioneLibera(Postazione postazione, LocalDate date) {
+	    return prenotazioniRepository.existsByPostazioneAndDataPrenotazione(postazione, date);
+	}
+
+	public boolean puoPrenotare(Utente utente, LocalDate date) {
+	    return prenotazioniRepository.existsByUtenteAndDataPrenotazione(utente, date);
+	}
+	
+	public void save(Prenotazione prenotazione) {
+	    Postazione postazione = prenotazione.getPostazione();
+	    Utente utente = prenotazione.getUtente();
+	    LocalDate dataPrenotazione = prenotazione.getDataPrenotazione();
+	    
+	    if(postazioneLibera(postazione, dataPrenotazione)) {
+	        log.error("La postazione " + postazione.getCu() + " è già prenotata per il giorno " + dataPrenotazione);
+	        return;
+	    }
+	    
+	    if(puoPrenotare(utente, dataPrenotazione)) {
+	        log.error("L'utente " + utente.getNomeCompleto() + " ha già una prenotazione per il giorno " + dataPrenotazione);
+	        return;
+	    }
+
+	    prenotazioniRepository.save(prenotazione);
+	    log.info(prenotazione + " salvato!");
+	}
 
 
 }

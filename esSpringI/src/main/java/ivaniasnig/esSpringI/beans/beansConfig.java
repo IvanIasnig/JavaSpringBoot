@@ -23,6 +23,11 @@ public class beansConfig {
 	Utente utente2() {
 		return new Utente("Pierpa08gg","Pierpaolo Senzacognome","giocotuttoilgiornoaLoL@gmail.com");
 	}
+
+	@Bean
+	Utente utente3() {
+		return new Utente("Mario","Rossi","fagiano@gmail.com");
+	}
 	
 	@Bean
 	Prenotazione prenotazione() {

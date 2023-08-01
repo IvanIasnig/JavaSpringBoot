@@ -20,7 +20,7 @@ class EsMartediApplicationTests {
 	    private MockMvc mockMvc;
 
 	    @Test
-	    public void getBookingRules_it_returnsItalianRules() throws Exception {
+	    public void prenotazioniRegole() throws Exception {
 
 	        mockMvc.perform(get("/booking-rules")
 	                        .param("lang", "it")

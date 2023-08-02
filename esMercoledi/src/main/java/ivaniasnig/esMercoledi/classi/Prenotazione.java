@@ -3,6 +3,11 @@ package ivaniasnig.esMercoledi.classi;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 //import jakarta.persistence.Entity;
 //import jakarta.persistence.GeneratedValue;
 //import jakarta.persistence.Id;
@@ -14,7 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//@Entity
+@Entity
 @AllArgsConstructor
 @Getter
 @Setter
@@ -22,18 +27,18 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Prenotazione {
 	
-//	@Id
-//	@GeneratedValue
-	private int id;
+	@Id
+	@GeneratedValue
+	private UUID id;
 
 	private LocalDate dataPrenotazione;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "utente_username")
+	@ManyToOne
+	@JoinColumn(name = "utente_username")
 	private Utente utente;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "postazione_cu")
+	@ManyToOne
+	@JoinColumn(name = "postazione_cu")
 	private Postazione postazione;
 	
 	public Prenotazione(LocalDate dataPrenotazione) {

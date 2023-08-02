@@ -24,7 +24,7 @@ public class Utente {
 	private String nomeCompleto;
 	private String mail;
 
-	//private Set<Prenotazione> prenotazioni;
+	private Set<Prenotazione> prenotazioni;
 	
 	public Utente(String username, String nomeCompleto, String mail) {
 		this.username = username;

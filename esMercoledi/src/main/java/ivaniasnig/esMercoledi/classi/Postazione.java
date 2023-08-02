@@ -4,6 +4,12 @@ import java.util.Set;
 import java.util.UUID;
 
 import ivaniasnig.esMercoledi.enums.TipoPostazione;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 //import jakarta.persistence.Entity;
 //import jakarta.persistence.EnumType;
 //import jakarta.persistence.Enumerated;
@@ -17,17 +23,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class Postazione {
-//	@Id
-//	@GeneratedValue
+	@Id
+	@GeneratedValue
 	private int cu;
 	private String descrizione;
-	//@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private TipoPostazione tipo;
 	private int maxPersone;
 	private String citta;
@@ -36,8 +42,8 @@ public class Postazione {
 //	@JoinColumn(name = "edificio_id", referencedColumnName = "id")
 	// private Edificio edificio;
 	
-//	@OneToMany(mappedBy = "postazione")
-	// private Set<Prenotazione> prenotazioni;
+	@OneToMany(mappedBy = "postazione")
+	 private Set<Prenotazione> prenotazioni;
 	
 	public Postazione(String descrizione, TipoPostazione tipo, int maxPersone, String citta) {
 		this.descrizione = descrizione;

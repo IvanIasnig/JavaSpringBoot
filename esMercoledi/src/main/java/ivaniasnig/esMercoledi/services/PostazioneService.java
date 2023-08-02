@@ -7,69 +7,62 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ivaniasnig.esMercoledi.classi.Postazione;
 import ivaniasnig.esMercoledi.enums.TipoPostazione;
+import ivaniasnig.esMercoledi.repository.PostazioniRepository;
 
 
 
 @Service
 public class PostazioneService {
 
-	private List<Postazione> postazioni = new ArrayList<>();
+	@Autowired
+	private PostazioniRepository postazioniRepo;
 	
 	public Postazione save(Postazione postazione) {
 		Random rand = new Random();
 		postazione.setCu(rand.nextInt());
-		this.postazioni.add(postazione);
-		return postazione;
+		return postazioniRepo.save(postazione);
 	}
 	
 	public List<Postazione> getPostazioni(){
-		return this.postazioni;
+		return postazioniRepo.findAll();
 	}
 	
-	public Optional<Postazione> findByCu(int cu){
-		Postazione p = null;
-		
-		for (Postazione postazione : postazioni) {
-			if(postazione.getCu() == cu)
-				p = postazione;
-		}
-		return Optional.ofNullable(p);
+	public Postazione findByCu(int cu){
+		return postazioniRepo.findById(cu).orElseThrow(() -> new RuntimeException());
 	}
 	
-	public void findByCuAndDelete(int cu, Postazione postazione) {
-		ListIterator<Postazione> iterator = this.postazioni.listIterator();
+	public Postazione findByCuAndUpdate(int cu, Postazione postazione){
+		Postazione found = this.findByCu(cu);
 		
-		while(iterator.hasNext()) {
-			Postazione currentPostazione =iterator.next();
-			if(currentPostazione.getCu() == cu) {
-				iterator.remove();
-			}
-		}
+		found.setCitta(postazione.getCitta());
+		found.setDescrizione(postazione.getDescrizione());
+		found.setMaxPersone(postazione.getMaxPersone());
+		found.setTipo(postazione.getTipo());
+		
+		return postazioniRepo.save(found);
 	}
 	
-	public Optional<Postazione> findByCuAndUpdate(int cu, Postazione postazione){
-		Postazione found = null;
-		
-		for (Postazione currentPostazione : postazioni) {
-			if(currentPostazione.getCu() == cu) {
-				found = currentPostazione;
-				found.setDescrizione(postazione.getDescrizione());
-				found.setTipo(postazione.getTipo());
-				found.setMaxPersone(postazione.getMaxPersone());
-				found.setCitta(postazione.getCitta());
-			}
-		}
-		return Optional.ofNullable(found);
+	public void findByCuAndDelete(int cu) {
+		Postazione found = this.findByCu(cu);
+		postazioniRepo.delete(found);
 	}
+	
+
 	
 	public List<Postazione> findByTipoAndCitta (TipoPostazione tipoPostazione, String citta){
-		List<Postazione> postazioniDue = postazioni.stream().filter((postazione) -> postazione.getTipo() == tipoPostazione && postazione.getCitta().equals(citta)).collect(Collectors.toList());
 		
-		if(!postazioniDue.isEmpty()) return postazioniDue;
+		List<Postazione> postazioni = this.getPostazioni();
+		
+		List<Postazione> postazioniFiltrate = postazioni.stream()
+				.filter((postazione) -> postazione.getTipo() == tipoPostazione && postazione.getCitta().equals(citta))
+				.toList();
+		
+		if(!postazioniFiltrate.isEmpty()) return postazioniFiltrate;
 		else return null;
 		
 	}

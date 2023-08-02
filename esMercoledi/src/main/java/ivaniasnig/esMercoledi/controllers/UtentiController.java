@@ -40,14 +40,14 @@ public class UtentiController {
 	
 	// 3. - GET http://localhost:3001/users/{id}
 	@GetMapping("/{username}")
-	public Utente findByUsername(@PathVariable String username) throws Exception {
-		return utenteService.findByUsername(username).orElseThrow(() -> new Exception("NON TROVATO"));
+	public Utente findByUsername(@PathVariable String username) {
+		return utenteService.findByUsername(username);
 	}
 	
 	// 4. - PUT http://localhost:3001/users/{id} (+ req.body)
 	@PutMapping("/{username}")
-	public Utente findAndUpdate(@PathVariable String username, @RequestBody Utente body) throws Exception {
-		return utenteService.findByUsernameAndUpdate(username,body).orElseThrow(() -> new Exception("NON TROVATO"));
+	public Utente findAndUpdate(@PathVariable String username, @RequestBody Utente body) {
+		return utenteService.findByUsernameAndUpdate(username,body);
 	}
 	
 	// 5. - DELETE http://localhost:3001/users/{id}

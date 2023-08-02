@@ -25,7 +25,7 @@ public class PrenotazioneService {
 	
 	public Prenotazione save(LocalDate dataPrenotazione, int postazioneId, String username) throws Exception {
 		Random rand = new Random();
-		Utente utente = utenteService.findByUsername(username).orElseThrow(() -> new Exception(" Utente non trovato :D "));
+		Utente utente = utenteService.findByUsername(username);
 		Postazione postazione = postazioneService.findByCu(postazioneId).orElseThrow(() -> new Exception(" Postazione non trovata D:"));
 		
 		Prenotazione prenotazione = new Prenotazione(rand.nextInt(), dataPrenotazione, utente, postazione);

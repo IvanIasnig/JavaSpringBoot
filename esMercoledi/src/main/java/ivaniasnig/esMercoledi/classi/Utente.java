@@ -2,6 +2,8 @@ package ivaniasnig.esMercoledi.classi;
 
 import java.util.Set;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 //import jakarta.persistence.Entity;
 //import jakarta.persistence.Id;
 //import jakarta.persistence.OneToMany;
@@ -10,13 +12,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
+@Entity
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class Utente {
 
+	@Id
 	private String username;
 	private String nomeCompleto;
 	private String mail;

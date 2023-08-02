@@ -30,13 +30,26 @@ public class PrenotazioneService {
 	
 	public Prenotazione save(LocalDate dataPrenotazione, int postazioneId, String username) throws Exception {
 
-		Utente utente = utenteService.findByUsername(username);
-		Postazione postazione = postazioneService.findByCu(postazioneId);
-				//.orElseThrow(() -> new Exception(" Postazione non trovata D:"));
-		
-		Prenotazione prenotazione = new Prenotazione( dataPrenotazione, utente, postazione);
-		this.prenotazioneRepo.save(prenotazione);
-		return prenotazione;
+	    if (!dataPrenotazione.isAfter(LocalDate.now().plusDays(1))) {
+	        throw new Exception("La prenotazione deve essere effettuata almeno 2 giorni prima della data desiderata!");
+	    }
+	    
+	    Utente utente = utenteService.findByUsername(username);
+	    Postazione postazione = postazioneService.findByCu(postazioneId);
+	    
+	    List<Prenotazione> prenotazioniUtente = prenotazioneRepo.findByUtenteAndDataPrenotazione(utente, dataPrenotazione);
+	    if (!prenotazioniUtente.isEmpty()) {
+	        throw new Exception("Hai già una prenotazione per questa data!");
+	    }
+
+	    List<Prenotazione> prenotazioniEsistenti = prenotazioneRepo.findByPostazioneAndDataPrenotazione(postazione, dataPrenotazione);
+	    if (!prenotazioniEsistenti.isEmpty()) {
+	        throw new Exception("La postazione è già prenotata per quella data!");
+	    }
+
+	    Prenotazione prenotazione = new Prenotazione(dataPrenotazione, utente, postazione);
+	    prenotazioneRepo.save(prenotazione);
+	    return prenotazione;
 	}
 	
 	public List<Prenotazione> getPrenotazioni(){

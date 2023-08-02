@@ -42,8 +42,8 @@ public class Postazione {
 //	@JoinColumn(name = "edificio_id", referencedColumnName = "id")
 	// private Edificio edificio;
 	
-	@OneToMany(mappedBy = "postazione")
-	 private Set<Prenotazione> prenotazioni;
+//	@OneToMany(mappedBy = "postazione")
+//	 private Set<Prenotazione> prenotazioni;
 	
 	public Postazione(String descrizione, TipoPostazione tipo, int maxPersone, String citta) {
 		this.descrizione = descrizione;

@@ -26,23 +26,25 @@ import lombok.ToString;
 public class Postazione {
 //	@Id
 //	@GeneratedValue
-	private UUID cu;
+	private int cu;
 	private String descrizione;
 	//@Enumerated(EnumType.STRING)
 	private TipoPostazione tipo;
 	private int maxPersone;
+	private String citta;
 	
 	//@OneToOne
 //	@JoinColumn(name = "edificio_id", referencedColumnName = "id")
-	private Edificio edificio;
+	// private Edificio edificio;
 	
 //	@OneToMany(mappedBy = "postazione")
-	private Set<Prenotazione> prenotazioni;
+	// private Set<Prenotazione> prenotazioni;
 	
-	public Postazione(String descrizione, TipoPostazione tipo, int maxPersone) {
+	public Postazione(String descrizione, TipoPostazione tipo, int maxPersone, String citta) {
 		this.descrizione = descrizione;
 		this.tipo = tipo;
 		this.maxPersone = maxPersone;
+		this.citta = citta;
 	}
 
 }

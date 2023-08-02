@@ -24,7 +24,7 @@ public class Prenotazione {
 	
 //	@Id
 //	@GeneratedValue
-	private UUID id;
+	private int id;
 
 	private LocalDate dataPrenotazione;
 	
@@ -38,6 +38,12 @@ public class Prenotazione {
 	
 	public Prenotazione(LocalDate dataPrenotazione) {
 		this.dataPrenotazione = dataPrenotazione;
+	}
+	
+	public Prenotazione(LocalDate dataPrenotazione, Utente utente, Postazione postazione) {
+		this.dataPrenotazione = dataPrenotazione;
+		this.utente = utente;
+		this.postazione = postazione;
 	}
 }
 

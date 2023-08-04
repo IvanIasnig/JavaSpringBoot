@@ -25,9 +25,13 @@ public class DispositiviService {
 	
 	public Dispositivi save(Dispositivi dispositivo, UUID idUtente) {
 		
-	    if (dispositivo.getDispositiviStato() != DispositiviStato.DISPONIBILE) {
-	        throw new BadRequestException("Dispositivo non disponibile");
+	    if (dispositivo.getUtente().getId() != null && dispositivo.getDispositiviStato() != DispositiviStato.DISPONIBILE) {
+	        throw new BadRequestException("Dispositivo non disponibile, non puoi assegnarlo ad un utente!");
 	    }
+		if(dispositivo.getUtente().getId() == null) {
+			dispositivo.setUtente(null);
+			return dispositiviRepo.save(dispositivo);
+		}
 		Utente utente = utentiService.findById(idUtente); //prova fix 403
 		dispositivo.setUtente(utente); //prova fix 403
 		return dispositiviRepo.save(dispositivo);

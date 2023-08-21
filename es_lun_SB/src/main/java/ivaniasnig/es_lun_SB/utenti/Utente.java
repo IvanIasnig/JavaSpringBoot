@@ -32,6 +32,7 @@ public class Utente implements UserDetails{
 	private UUID id;
 	@Convert(converter = NomeConverter.class)
 	private String nome;
+	@Convert(converter = NomeConverter.class)
 	private String cognome;
 	private String email;
 	private String password;

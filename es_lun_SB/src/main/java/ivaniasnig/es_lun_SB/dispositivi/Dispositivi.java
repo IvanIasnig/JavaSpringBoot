@@ -3,6 +3,8 @@ package ivaniasnig.es_lun_SB.dispositivi;
 import java.util.UUID;
 
 import ivaniasnig.es_lun_SB.utenti.Utente;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Converter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -16,9 +18,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Dispositivi {
-	@Id
-	@GeneratedValue
-	private UUID id;
+    @Id
+    @GeneratedValue
+    @Convert(converter = IdConverter.class)
+    private UUID id;
 	
 	@Enumerated(EnumType.STRING)
 	private DispositiviStato dispositiviStato;

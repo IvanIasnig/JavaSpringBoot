@@ -3,6 +3,7 @@ package ivaniasnig.es_lun_SB.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +25,13 @@ public class AuthController {
 	@Autowired
 	JwtTools jwtTools;
 	
+	@Autowired
+	PasswordEncoder bcrypt;
+	
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Utente saveUtente(@RequestBody Utente body) {
+		body.setPassword(bcrypt.encode(body.getPassword()));
         Utente utente = new Utente(body.getNome(), body.getCognome(), body.getEmail(), body.getPassword(), body.getUsername());
         return utentiService.save(utente);
 	}
@@ -37,7 +42,7 @@ public class AuthController {
 		
 		Utente utente = utentiService.findByEmail(loginPayloadBody.getEmail());
 		
-		if(loginPayloadBody.getPassword().equals(utente.getPassword())) {
+		if(bcrypt.matches(loginPayloadBody.getPassword(), utente.getPassword())) {
 			
 			String token =jwtTools.createToken(utente);
 			return new ResponseEntity<>(token, HttpStatus.OK); //200

@@ -8,7 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import ivaniasnig.es_lun_SB.dispositivi.Dispositivi;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,11 +24,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+//@JsonIgnoreProperties({"password"})
 public class Utente implements UserDetails{
 
 	@Id
 	@GeneratedValue
 	private UUID id;
+	@Convert(converter = NomeConverter.class)
 	private String nome;
 	private String cognome;
 	private String email;

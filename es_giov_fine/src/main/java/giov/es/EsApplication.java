@@ -19,8 +19,8 @@ public class EsApplication {
         info.setNome("Ivan");
         info.setCognome("Iasnig");
 
-        LocalDate birthDate = LocalDate.of(1998, 9, 23);
-        info.setDataDiNascita(birthDate);
+        LocalDate compleanno = LocalDate.of(1998, 9, 23);
+        info.setDataDiNascita(compleanno);
 
         InfoAdapter adapter = new InfoAdapter(info);
 

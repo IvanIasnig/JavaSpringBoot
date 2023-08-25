@@ -1,14 +1,12 @@
 package ivan.finale.classes;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+
 
 import ivan.finale.interfaces.Observable;
 import ivan.finale.interfaces.Observer;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -32,6 +30,8 @@ public class Sensore implements Observable {
 		this.livFumo = liv;
 		if (liv > 5) {
 			notiObserver();
+		} else {
+			System.out.println("Fumo nella norma per il sensore " + this.id);
 		}
 	}
 	

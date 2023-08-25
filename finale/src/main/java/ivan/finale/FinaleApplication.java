@@ -22,14 +22,19 @@ public class FinaleApplication {
 		Sensore sensore2 = factory.creaSensore("Napoli28",10, 50);
 		System.out.println(sensore2);
 		
+		Sensore sensore3 = factory.creaSensore("Trieste2",10, 50);
+		System.out.println(sensore3);
+		
 		//--------- creazione controllo ---------
 		CentroControllo control = new CentroControllo();
 
 		sensore.modObserver(control);
 		sensore2.modObserver(control);
+		sensore3.modObserver(control);
 		
 		sensore.setLivFumo(6);
 		sensore2.setLivFumo(7);
+		sensore3.setLivFumo(4);
 	}
 	
 

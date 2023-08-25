@@ -14,12 +14,12 @@ public class FinaleApplication {
 		SpringApplication.run(FinaleApplication.class, args);
 		
 		//------creazione sensore normalmente--------
-		Sensore sensore = new Sensore("Ascoli 12",18,100);
+		Sensore sensore = new Sensore("Ascoli12",18,100);
 		System.out.println(sensore);
 		
 		//------creazione sensore da factory--------
 		SensoreFactory factory = new SensoreFactory();
-		Sensore sensore2 = factory.creaSensore("Napoli 28",10, 50);
+		Sensore sensore2 = factory.creaSensore("Napoli28",10, 50);
 		System.out.println(sensore2);
 		
 		//--------- creazione controllo ---------

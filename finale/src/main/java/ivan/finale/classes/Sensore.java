@@ -30,7 +30,7 @@ public class Sensore implements Observable {
 	
 	public void setLivFumo(int liv) {
 		this.livFumo = liv;
-		if (this.livFumo > 5) {
+		if (liv > 5) {
 			notiObserver();
 		}
 	}
@@ -43,7 +43,7 @@ public class Sensore implements Observable {
 	@Override
 	public void notiObserver() {
 		for (int i = 0; i< observer.size(); i++) {
-			observer.get(i).aggiorna(livFumo, latitudine, longitudine);
+			observer.get(i).aggiorna(id,livFumo, latitudine, longitudine);
 		}
 	}
 

@@ -6,13 +6,13 @@ import ivan.finale.interfaces.Observer;
 public class CentroControllo implements Allarme, Observer{
 	
 	@Override
-	public void aggiorna(int livFumo, double latitudine, double longitudine) {
-		notifica(livFumo, latitudine, longitudine);
+	public void aggiorna(String id,int livFumo, double latitudine, double longitudine) {
+		notifica(id,livFumo, latitudine, longitudine);
 	}
 	
 	@Override
-	public void notifica(int livFumo, double latitudine, double longitudine) {
-		System.out.println("http://hostialarm?idsonda="  + "&lat=" + latitudine + "&lon=" + longitudine + "&smokelevel=" + livFumo);
+	public void notifica(String id,int livFumo, double latitudine, double longitudine) {
+		System.out.println("http://hostialarm?idsonda="+ id + "&lat=" + latitudine + "&lon=" + longitudine + "&smokelevel=" + livFumo);
 	};
 
 }

@@ -11,6 +11,5 @@ public class Info {
     private String nome; 
     private String cognome; 
     private LocalDate dataDiNascita; 
-
 }
 

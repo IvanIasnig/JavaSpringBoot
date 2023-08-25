@@ -9,17 +9,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Sensore implements EventListener {
+public class Sensore extends absSensore implements EventListener {
 
-	
-	private String id;
 	private int livFumo;
 	double latitudine;
 	double longitudine; 
 	private ArrayList<Observer> observer;
 	
 	public Sensore(String id,double latitudine, double longitudine) {
-		this.id = id;
+		super(id);
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
 		this.observer = new ArrayList<>();

@@ -13,17 +13,16 @@ import lombok.ToString;
 @Getter
 @Setter
 public class Sensore implements Observable {
-	@Override
-	public String toString() {
-		return "Sensore [livFumo=" + livFumo + ", latitudine=" + latitudine + ", longitudine=" + longitudine + "]";
-	}
 
+	
+	private String id;
 	private int livFumo;
 	double latitudine;
 	double longitudine; 
 	private ArrayList<Observer> observer;
 	
-	public Sensore(double latitudine, double longitudine) {
+	public Sensore(String id,double latitudine, double longitudine) {
+		this.id = id;
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
 		this.observer = new ArrayList<>();
@@ -44,8 +43,16 @@ public class Sensore implements Observable {
 	@Override
 	public void notiObserver() {
 		for (int i = 0; i< observer.size(); i++) {
-			observer.get(i).aggiorna(livFumo, latitudine, longitudine);
+			observer.get(i).aggiorna(id,livFumo, latitudine, longitudine);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Sensore [id=" + id + ", livFumo=" + livFumo + ", latitudine=" + latitudine + ", longitudine="
+				+ longitudine + "]";
 	};
+	
+
  
 }

@@ -2,15 +2,14 @@ package ivan.finale.classes;
 
 import java.util.ArrayList;
 
-
-import ivan.finale.interfaces.Observable;
+import ivan.finale.interfaces.EventListener;
 import ivan.finale.interfaces.Observer;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Sensore implements Observable {
+public class Sensore implements EventListener {
 
 	
 	private String id;

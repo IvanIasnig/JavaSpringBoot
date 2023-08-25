@@ -43,7 +43,7 @@ public class Sensore implements Observable {
 	@Override
 	public void notiObserver() {
 		for (int i = 0; i< observer.size(); i++) {
-			observer.get(i).aggiorna(id,livFumo, latitudine, longitudine);
+			observer.get(i).aggiorna(livFumo, latitudine, longitudine);
 		}
 	}
 
